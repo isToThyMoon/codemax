@@ -1,0 +1,35 @@
+{
+  "projectName": "codemax",
+  "mode": "file-router",
+  "typescript": true,
+  "tailwind": true,
+  "packageManager": "pnpm",
+  "addOnOptions": {
+    "prisma": {
+      "database": "postgres"
+    }
+  },
+  "git": true,
+  "version": 1,
+  "framework": "react-cra",
+  "chosenAddOns": [
+    "biome",
+    "nitro",
+    "start",
+    "neon",
+    "sentry",
+    "prisma",
+    "mcp",
+    "ai",
+    "tRPC",
+    "table",
+    "t3env",
+    "shadcn",
+    "tanstack-query",
+    "form",
+    "db",
+    "apollo-client",
+    "events",
+    "store"
+  ]
+}
