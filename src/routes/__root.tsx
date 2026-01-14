@@ -22,6 +22,7 @@ import type { QueryClient } from '@tanstack/react-query'
 
 import type { TRPCRouter } from '@/integrations/trpc/router'
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query'
+import { Provider } from '../integrations/tanstack-query/root-provider'
 
 interface MyRouterContext extends ApolloClientIntegration.RouterContext {
   queryClient: QueryClient
@@ -52,33 +53,55 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
 
   shellComponent: RootDocument,
+  notFoundComponent: NotFound,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { queryClient } = Route.useRouteContext()
+
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
-        <Header />
-        {children}
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-            AiDevtools,
-            TanStackQueryDevtools,
-            StoreDevtools,
-          ]}
-        />
+        <Provider queryClient={queryClient}>
+          <Header />
+          {children}
+          <TanStackDevtools
+            config={{
+              position: 'bottom-right',
+            }}
+            plugins={[
+              {
+                name: 'Tanstack Router',
+                render: <TanStackRouterDevtoolsPanel />,
+              },
+              AiDevtools,
+              TanStackQueryDevtools,
+              StoreDevtools,
+            ]}
+          />
+        </Provider>
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function NotFound() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4">404</h1>
+        <p className="text-xl text-gray-600 mb-8">页面未找到</p>
+        <a
+          href="/"
+          className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          返回首页
+        </a>
+      </div>
+    </div>
   )
 }

@@ -16,7 +16,7 @@ function FirstName() {
       onChange={(e) =>
         store.setState((state) => ({ ...state, firstName: e.target.value }))
       }
-      className="bg-white/10 rounded-lg px-4 py-2 outline-none border border-white/20 hover:border-white/40 focus:border-white/60 transition-colors duration-200 placeholder-white/40"
+      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
     />
   )
 }
@@ -30,7 +30,7 @@ function LastName() {
       onChange={(e) =>
         store.setState((state) => ({ ...state, lastName: e.target.value }))
       }
-      className="bg-white/10 rounded-lg px-4 py-2 outline-none border border-white/20 hover:border-white/40 focus:border-white/60 transition-colors duration-200 placeholder-white/40"
+      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
     />
   )
 }
@@ -38,7 +38,7 @@ function LastName() {
 function FullName() {
   const fName = useStore(fullName)
   return (
-    <div className="bg-white/10 rounded-lg px-4 py-2 outline-none ">
+    <div className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 font-medium">
       {fName}
     </div>
   )
@@ -46,18 +46,14 @@ function FullName() {
 
 function DemoStore() {
   return (
-    <div
-      className="min-h-[calc(100vh-32px)] text-white p-8 flex items-center justify-center w-full h-full"
-      style={{
-        backgroundImage:
-          'radial-gradient(50% 50% at 80% 80%, #f4a460 0%, #8b4513 70%, #1a0f0a 100%)',
-      }}
-    >
-      <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 shadow-lg flex flex-col gap-4 text-3xl min-w-1/2">
-        <h1 className="text-4xl font-bold mb-5">Store Example</h1>
-        <FirstName />
-        <LastName />
-        <FullName />
+    <div className="flex items-center justify-center min-h-[calc(100vh-80px)] bg-white p-4">
+      <div className="w-full max-w-lg p-8 rounded-xl bg-white border border-gray-200 shadow-xl">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Store Example</h1>
+        <div className="flex flex-col gap-4">
+          <FirstName />
+          <LastName />
+          <FullName />
+        </div>
       </div>
     </div>
   )

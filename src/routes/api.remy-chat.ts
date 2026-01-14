@@ -75,7 +75,9 @@ Remember: You are the friendly face of Haute Pâtisserie 2026. Make every attend
           // Adapter factory pattern for multi-vendor support
           const adapterConfig = {
             anthropic: () =>
-              anthropicText((model || 'claude-haiku-4-5') as any),
+              anthropicText((model || 'claude-haiku-4-5') as any, {
+                baseURL: process.env.ANTHROPIC_BASE_URL,
+              } as any),
             openai: () => openaiText((model || 'gpt-4o') as any),
             gemini: () => geminiText((model || 'gemini-2.0-flash-exp') as any),
             ollama: () => ollamaText((model || 'mistral:7b') as any),

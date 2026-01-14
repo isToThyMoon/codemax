@@ -38,3 +38,8 @@ export const recommendGuitarToolDef = toolDefinition({
     id: z.number(),
   }),
 })
+
+// Server implementation for guitar recommendation
+export const recommendGuitarTool = recommendGuitarToolDef.server(({ id }) => ({
+  id: +id,
+}))

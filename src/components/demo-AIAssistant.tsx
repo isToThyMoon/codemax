@@ -24,9 +24,9 @@ function Messages({ messages }: { messages: ChatMessages }) {
 
   if (!messages.length) {
     return (
-      <div className="flex-1 flex items-center justify-center text-gray-400 text-sm">
-        Ask me anything! I'm here to help.
-      </div>
+    <div className="flex-1 flex items-center justify-center text-slate-400 text-sm">
+      Ask me anything! I'm here to help.
+    </div>
     )
   }
 
@@ -37,24 +37,24 @@ function Messages({ messages }: { messages: ChatMessages }) {
           key={id}
           className={`py-3 ${
             role === 'assistant'
-              ? 'bg-linear-to-r from-orange-500/5 to-red-600/5'
+              ? 'bg-slate-50'
               : 'bg-transparent'
           }`}
         >
           {parts.map((part, index) => {
             if (part.type === 'text' && part.content) {
               return (
-                <div key={index} className="flex items-start gap-2 px-4">
+                <div key={index} className="flex items-start gap-3 px-4">
                   {role === 'assistant' ? (
-                    <div className="w-6 h-6 rounded-lg bg-linear-to-r from-orange-500 to-red-600 flex items-center justify-center text-xs font-medium text-white flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-xs font-medium text-white flex-shrink-0 shadow-sm">
                       AI
                     </div>
                   ) : (
-                    <div className="w-6 h-6 rounded-lg bg-gray-700 flex items-center justify-center text-xs font-medium text-white flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center text-xs font-medium text-slate-600 flex-shrink-0">
                       Y
                     </div>
                   )}
-                  <div className="flex-1 min-w-0 text-white prose dark:prose-invert max-w-none prose-sm">
+                  <div className="flex-1 min-w-0 text-slate-700 prose prose-slate prose-sm max-w-none">
                     <Streamdown>{part.content}</Streamdown>
                   </div>
                 </div>
@@ -87,22 +87,24 @@ export default function AIAssistant() {
     <div className="relative z-50">
       <button
         onClick={() => showAIAssistant.setState((state) => !state)}
-        className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg bg-linear-to-r from-green-700 to-green-900 text-white hover:opacity-90 transition-opacity"
+        className="group w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-white border border-blue-100 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
       >
-        <div className="flex items-center gap-2">
-          <BotIcon size={24} />
-          <span className="font-medium">AI Assistant</span>
+        <div className="flex items-center gap-3">
+          <div className="p-1.5 rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+            <BotIcon size={20} />
+          </div>
+          <span className="font-semibold text-sm">AI Assistant</span>
         </div>
-        <ChevronRight className="w-4 h-4" />
+        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-0 left-full ml-2 w-[700px] h-[600px] bg-gray-900 rounded-lg shadow-xl border border-orange-500/20 flex flex-col">
-          <div className="flex items-center justify-between p-3 border-b border-orange-500/20">
-            <h3 className="font-semibold text-white">AI Assistant</h3>
+        <div className="absolute bottom-0 left-full ml-4 w-[700px] h-[600px] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-white/80 backdrop-blur-sm">
+            <h3 className="font-semibold text-slate-800">AI Assistant</h3>
             <button
               onClick={() => showAIAssistant.setState((state) => !state)}
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-100 rounded-md"
             >
               <X className="w-4 h-4" />
             </button>
@@ -110,7 +112,7 @@ export default function AIAssistant() {
 
           <Messages messages={messages} />
 
-          <div className="p-3 border-t border-orange-500/20">
+          <div className="p-4 border-t border-slate-100 bg-white">
             <form
               onSubmit={(e) => {
                 e.preventDefault()
@@ -125,9 +127,9 @@ export default function AIAssistant() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type your message..."
-                  className="w-full rounded-lg border border-orange-500/20 bg-gray-800/50 pl-3 pr-10 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent resize-none overflow-hidden"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 pl-4 pr-12 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 resize-none overflow-hidden transition-all"
                   rows={1}
-                  style={{ minHeight: '36px', maxHeight: '120px' }}
+                  style={{ minHeight: '44px', maxHeight: '120px' }}
                   onInput={(e) => {
                     const target = e.target as HTMLTextAreaElement
                     target.style.height = 'auto'
@@ -145,7 +147,7 @@ export default function AIAssistant() {
                 <button
                   type="submit"
                   disabled={!input.trim()}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-orange-500 hover:text-orange-400 disabled:text-gray-500 transition-colors focus:outline-none"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-blue-600 hover:text-blue-700 disabled:text-slate-300 transition-colors focus:outline-none hover:bg-blue-50 rounded-lg"
                 >
                   <Send className="w-4 h-4" />
                 </button>

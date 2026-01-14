@@ -141,19 +141,19 @@ function TableDemo() {
   }, [table.getState().columnFilters[0]?.id])
 
   return (
-    <div className="min-h-screen bg-gray-900 p-6">
+    <div className="min-h-screen bg-white p-6">
       <div>
         <DebouncedInput
           value={globalFilter ?? ''}
           onChange={(value) => setGlobalFilter(String(value))}
-          className="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+          className="w-full p-3 bg-white text-gray-900 rounded-lg border border-gray-200 focus:ring-2 focus:ring-black/5 focus:border-gray-300 outline-none shadow-sm"
           placeholder="Search all columns..."
         />
       </div>
       <div className="h-4" />
-      <div className="overflow-x-auto rounded-lg border border-gray-700">
-        <table className="w-full text-sm text-gray-200">
-          <thead className="bg-gray-800 text-gray-100">
+      <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+        <table className="w-full text-sm text-gray-600">
+          <thead className="bg-gray-50 text-gray-900 border-b border-gray-200">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -161,14 +161,14 @@ function TableDemo() {
                     <th
                       key={header.id}
                       colSpan={header.colSpan}
-                      className="px-4 py-3 text-left"
+                      className="px-4 py-3 text-left font-semibold"
                     >
                       {header.isPlaceholder ? null : (
                         <>
                           <div
                             {...{
                               className: header.column.getCanSort()
-                                ? 'cursor-pointer select-none hover:text-blue-400 transition-colors'
+                                ? 'cursor-pointer select-none hover:text-black transition-colors'
                                 : '',
                               onClick: header.column.getToggleSortingHandler(),
                             }}
@@ -195,12 +195,12 @@ function TableDemo() {
               </tr>
             ))}
           </thead>
-          <tbody className="divide-y divide-gray-700">
+          <tbody className="divide-y divide-gray-200">
             {table.getRowModel().rows.map((row) => {
               return (
                 <tr
                   key={row.id}
-                  className="hover:bg-gray-800 transition-colors"
+                  className="hover:bg-gray-50 transition-colors"
                 >
                   {row.getVisibleCells().map((cell) => {
                     return (
@@ -219,30 +219,30 @@ function TableDemo() {
         </table>
       </div>
       <div className="h-4" />
-      <div className="flex flex-wrap items-center gap-2 text-gray-200">
+      <div className="flex flex-wrap items-center gap-2 text-gray-600">
         <button
-          className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-3 py-1 bg-white border border-gray-200 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
           {'<<'}
         </button>
         <button
-          className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-3 py-1 bg-white border border-gray-200 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
           {'<'}
         </button>
         <button
-          className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-3 py-1 bg-white border border-gray-200 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
           {'>'}
         </button>
         <button
-          className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-3 py-1 bg-white border border-gray-200 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >
@@ -250,7 +250,7 @@ function TableDemo() {
         </button>
         <span className="flex items-center gap-1">
           <div>Page</div>
-          <strong>
+          <strong className="text-gray-900">
             {table.getState().pagination.pageIndex + 1} of{' '}
             {table.getPageCount()}
           </strong>
@@ -264,7 +264,7 @@ function TableDemo() {
               const page = e.target.value ? Number(e.target.value) - 1 : 0
               table.setPageIndex(page)
             }}
-            className="w-16 px-2 py-1 bg-gray-800 rounded-md border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+            className="w-16 px-2 py-1 bg-white rounded-md border border-gray-200 focus:ring-2 focus:ring-black/5 focus:border-gray-300 outline-none shadow-sm"
           />
         </span>
         <select
@@ -272,7 +272,7 @@ function TableDemo() {
           onChange={(e) => {
             table.setPageSize(Number(e.target.value))
           }}
-          className="px-2 py-1 bg-gray-800 rounded-md border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+          className="px-2 py-1 bg-white rounded-md border border-gray-200 focus:ring-2 focus:ring-black/5 focus:border-gray-300 outline-none shadow-sm"
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
@@ -281,24 +281,24 @@ function TableDemo() {
           ))}
         </select>
       </div>
-      <div className="mt-4 text-gray-400">
+      <div className="mt-4 text-gray-500">
         {table.getPrePaginationRowModel().rows.length} Rows
       </div>
       <div className="mt-4 flex gap-2">
         <button
           onClick={() => rerender()}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors shadow-sm"
         >
           Force Rerender
         </button>
         <button
           onClick={() => refreshData()}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors shadow-sm"
         >
           Refresh Data
         </button>
       </div>
-      <pre className="mt-4 p-4 bg-gray-800 rounded-lg text-gray-300 overflow-auto">
+      <pre className="mt-4 p-4 bg-gray-50 rounded-lg text-gray-600 border border-gray-200 overflow-auto">
         {JSON.stringify(
           {
             columnFilters: table.getState().columnFilters,
@@ -321,7 +321,7 @@ function Filter({ column }: { column: Column<any, unknown> }) {
       value={(columnFilterValue ?? '') as string}
       onChange={(value) => column.setFilterValue(value)}
       placeholder={`Search...`}
-      className="w-full px-2 py-1 bg-gray-700 text-white rounded-md border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+      className="w-full px-2 py-1 bg-white text-gray-900 rounded-md border border-gray-200 focus:ring-2 focus:ring-black/5 focus:border-gray-300 outline-none shadow-sm"
     />
   )
 }

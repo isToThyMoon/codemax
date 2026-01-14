@@ -19,13 +19,13 @@ export const Route = createFileRoute('/demo/sentry/testing')({
       Sentry.captureException(error)
     }, [error])
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#181423]">
-        <div className="text-center p-8">
+      <div className="min-h-screen flex items-center justify-center bg-white p-4">
+        <div className="text-center p-8 bg-gray-50 rounded-xl border border-gray-200">
           <SentryLogo />
-          <h1 className="text-2xl font-bold text-white mt-4 mb-2">
+          <h1 className="text-2xl font-bold text-gray-900 mt-4 mb-2">
             Something went wrong
           </h1>
-          <p className="text-[#A49FB5]">{error.message}</p>
+          <p className="text-gray-500">{error.message}</p>
         </div>
       </div>
     )
@@ -101,48 +101,41 @@ function SentryButton({
   disabled?: boolean
   loading?: boolean
 }) {
-  const baseColor = variant === 'error' ? '#E50045' : '#553DB8'
-  const topColor = variant === 'error' ? '#FF1A5C' : '#7553FF'
+  const baseClasses =
+    variant === 'error'
+      ? 'bg-red-600 hover:bg-red-700 text-white'
+      : 'bg-black hover:bg-gray-800 text-white'
 
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled || loading}
-      className="group w-full rounded-lg text-white cursor-pointer border-none p-0 transition-all disabled:cursor-not-allowed disabled:opacity-60"
-      style={{ backgroundColor: baseColor }}
+      className={`group w-full rounded-lg px-6 py-4 text-lg font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-60 flex items-center justify-center gap-3 ${baseClasses}`}
     >
-      <span
-        className="flex items-center justify-center gap-3 px-6 py-4 rounded-lg text-lg font-semibold transition-transform group-hover:-translate-y-1 group-active:translate-y-0 group-disabled:translate-y-0"
-        style={{
-          backgroundColor: topColor,
-          border: `1px solid ${baseColor}`,
-        }}
-      >
-        {loading && (
-          <svg
-            className="animate-spin h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-        )}
-        {children}
-      </span>
+      {loading && (
+        <svg
+          className="animate-spin h-5 w-5"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          />
+        </svg>
+      )}
+      {children}
     </button>
   )
 }
@@ -158,14 +151,14 @@ function FeatureCard({
   description: string
 }) {
   return (
-    <div className="bg-[#1C1825] rounded-xl p-4 border border-[#2D2640] hover:border-[#7553FF]/50 transition-all group">
+    <div className="bg-white rounded-xl p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all group">
       <div className="flex items-center gap-3 mb-2">
-        <div className="text-[#7553FF] group-hover:scale-110 transition-transform">
+        <div className="text-black group-hover:scale-110 transition-transform">
           {icon}
         </div>
-        <h3 className="font-semibold text-white">{title}</h3>
+        <h3 className="font-semibold text-gray-900">{title}</h3>
       </div>
-      <p className="text-sm text-[#A49FB5] pl-9">{description}</p>
+      <p className="text-sm text-gray-500 pl-9">{description}</p>
     </div>
   )
 }
@@ -192,9 +185,9 @@ function ResultBadge({
   return (
     <div className="mt-4 space-y-3">
       {type === 'error' && (
-        <div className="flex items-center gap-2 bg-[#E50045]/10 border border-[#E50045]/30 rounded-lg px-4 py-3">
+        <div className="flex items-center gap-2 bg-red-50 border border-red-100 rounded-lg px-4 py-3">
           <svg
-            className="w-5 h-5 text-[#FF1A5C]"
+            className="w-5 h-5 text-red-600"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -205,16 +198,16 @@ function ResultBadge({
             <title>Error captured</title>
             <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
-          <span className="text-[#FF1A5C] text-sm font-medium">
+          <span className="text-red-600 text-sm font-medium">
             Error captured and sent to Sentry
           </span>
         </div>
       )}
 
       {type === 'success' && (
-        <div className="flex items-center gap-2 bg-[#00F261]/10 border border-[#00BF4D]/30 rounded-lg px-4 py-3">
+        <div className="flex items-center gap-2 bg-green-50 border border-green-100 rounded-lg px-4 py-3">
           <svg
-            className="w-5 h-5 text-[#00F261]"
+            className="w-5 h-5 text-green-600"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -225,7 +218,7 @@ function ResultBadge({
             <title>Trace complete</title>
             <path d="M5 13l4 4L19 7" />
           </svg>
-          <span className="text-[#00F261] text-sm font-medium">
+          <span className="text-green-600 text-sm font-medium">
             Trace completed successfully
           </span>
         </div>
@@ -234,12 +227,12 @@ function ResultBadge({
       <button
         type="button"
         onClick={handleCopy}
-        className="relative flex items-center gap-2 bg-[#7553FF]/10 hover:bg-[#7553FF]/20 border border-[#7553FF]/30 rounded-lg px-4 py-2 transition-all cursor-pointer w-full"
+        className="relative flex items-center gap-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg px-4 py-2 transition-all cursor-pointer w-full"
       >
-        <span className="text-[#B3A1FF] text-sm">span.op:</span>
-        <code className="text-[#7553FF] font-mono text-sm">{spanOp}</code>
+        <span className="text-gray-500 text-sm">span.op:</span>
+        <code className="text-gray-900 font-mono text-sm">{spanOp}</code>
         <svg
-          className="w-4 h-4 text-[#B3A1FF] ml-auto"
+          className="w-4 h-4 text-gray-400 ml-auto"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -251,7 +244,7 @@ function ResultBadge({
           <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
         </svg>
         {copied && (
-          <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#00F261] text-[#181423] text-xs font-medium px-2 py-1 rounded animate-pulse">
+          <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs font-medium px-2 py-1 rounded animate-pulse">
             Copied!
           </span>
         )}
@@ -265,15 +258,15 @@ function ProgressBar({ loading }: { loading: boolean }) {
   return (
     <div className="mt-4 flex items-center gap-3">
       <div
-        className={`w-3 h-3 rounded-full transition-all ${loading ? 'bg-[#7553FF] animate-pulse' : 'bg-[#00F261]'}`}
+        className={`w-3 h-3 rounded-full transition-all ${loading ? 'bg-black animate-pulse' : 'bg-green-500'}`}
       />
-      <div className="flex-1 h-2 bg-[#2D2640] rounded-full overflow-hidden">
+      <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden border border-gray-200">
         <div
-          className="h-full bg-gradient-to-r from-[#7553FF] to-[#B3A1FF] rounded-full transition-all duration-500"
+          className="h-full bg-black rounded-full transition-all duration-500"
           style={{ width: loading ? '60%' : '100%' }}
         />
       </div>
-      <span className="text-xs text-[#A49FB5] w-16 text-right">
+      <span className="text-xs text-gray-500 w-16 text-right">
         {loading ? 'Running...' : 'Complete'}
       </span>
     </div>
@@ -378,39 +371,31 @@ function RouteComponent() {
   }
 
   return (
-    <div
-      className="min-h-screen text-white"
-      style={{
-        fontFamily:
-          'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-        background:
-          'linear-gradient(180deg, #181423 0%, #1C1825 50%, #181423 100%)',
-      }}
-    >
+    <div className="min-h-screen text-gray-900 bg-white">
       <div className="max-w-5xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-4 mb-8">
-            <div className="text-[#7553FF]">
+            <div className="text-black">
               <SentryLogo size={56} />
             </div>
             <div className="text-left">
-              <h1 className="text-3xl font-bold text-white tracking-tight">
+              <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
                 Sentry Demo
               </h1>
-              <p className="text-[#A49FB5] text-sm">
+              <p className="text-gray-500 text-sm">
                 Error monitoring & performance tracing
               </p>
             </div>
           </div>
-          <p className="text-lg text-[#A49FB5] max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 max-w-xl mx-auto leading-relaxed">
             Click the buttons below to trigger errors and traces, then view them
             in your{' '}
             <a
               href="https://sentry.io"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#7553FF] hover:text-[#B3A1FF] underline transition-colors"
+              className="text-black hover:text-gray-700 underline transition-colors"
             >
               Sentry dashboard
             </a>
@@ -420,9 +405,9 @@ function RouteComponent() {
 
         {/* Sentry Not Initialized Warning */}
         {showWarning && (
-          <div className="mb-8 flex items-center gap-3 bg-[#E5A000]/10 border border-[#E5A000]/30 rounded-xl px-6 py-4">
+          <div className="mb-8 flex items-center gap-3 bg-yellow-50 border border-yellow-200 rounded-xl px-6 py-4">
             <svg
-              className="w-6 h-6 text-[#E5A000] flex-shrink-0"
+              className="w-6 h-6 text-yellow-600 flex-shrink-0"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -434,12 +419,12 @@ function RouteComponent() {
               <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             <div>
-              <p className="text-[#E5A000] font-medium">
+              <p className="text-yellow-800 font-medium">
                 Sentry is not initialized
               </p>
-              <p className="text-[#A49FB5] text-sm mt-1">
+              <p className="text-yellow-700 text-sm mt-1">
                 Set the{' '}
-                <code className="bg-[#1C1825] px-1.5 py-0.5 rounded text-[#B3A1FF]">
+                <code className="bg-white border border-yellow-200 px-1.5 py-0.5 rounded text-yellow-900">
                   VITE_SENTRY_DSN
                 </code>{' '}
                 environment variable to enable error tracking and performance
@@ -492,10 +477,10 @@ function RouteComponent() {
         {/* Testing Panels */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Client-Side Panel */}
-          <div className="bg-[#1C1825] rounded-2xl p-8 border border-[#2D2640]">
+          <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-3 h-3 rounded-full bg-[#00F261]" />
-              <h2 className="text-xl font-semibold">Client-Side Testing</h2>
+              <div className="w-3 h-3 rounded-full bg-green-500" />
+              <h2 className="text-xl font-semibold text-gray-900">Client-Side Testing</h2>
             </div>
 
             <div className="space-y-4">
@@ -544,10 +529,10 @@ function RouteComponent() {
           </div>
 
           {/* Server-Side Panel */}
-          <div className="bg-[#1C1825] rounded-2xl p-8 border border-[#2D2640]">
+          <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-3 h-3 rounded-full bg-[#7553FF]" />
-              <h2 className="text-xl font-semibold">Server-Side Testing</h2>
+              <div className="w-3 h-3 rounded-full bg-black" />
+              <h2 className="text-xl font-semibold text-gray-900">Server-Side Testing</h2>
             </div>
 
             <div className="space-y-4">
@@ -598,9 +583,9 @@ function RouteComponent() {
 
         {/* Footer Note */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-[#6E6C75]">
+          <p className="text-sm text-gray-500">
             This page uses{' '}
-            <code className="bg-[#1C1825] px-2 py-1 rounded text-[#B3A1FF]">
+            <code className="bg-gray-100 px-2 py-1 rounded text-black border border-gray-200">
               @sentry/tanstackstart-react
             </code>{' '}
             for full-stack error monitoring.
@@ -609,7 +594,7 @@ function RouteComponent() {
               href="https://docs.sentry.io/platforms/javascript/guides/tanstackstart-react/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#7553FF] hover:text-[#B3A1FF] underline transition-colors"
+              className="text-black hover:text-gray-700 underline transition-colors"
             >
               Read the documentation →
             </a>

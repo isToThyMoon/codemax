@@ -33,10 +33,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="p-4 flex items-center bg-gray-800 text-white shadow-lg">
+      <header className="p-4 flex items-center bg-white/80 backdrop-blur-md text-gray-900 border-b border-gray-200 sticky top-0 z-50">
         <button
           onClick={() => setIsOpen(true)}
-          className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
           aria-label="Open menu"
         >
           <Menu size={24} />
@@ -46,22 +46,22 @@ export default function Header() {
             <img
               src="/tanstack-word-logo-white.svg"
               alt="TanStack Logo"
-              className="h-10"
+              className="h-10 invert"
             />
           </Link>
         </h1>
       </header>
 
       <aside
-        className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
+        className={`fixed top-0 left-0 h-full w-80 bg-white text-gray-900 border-r border-gray-200 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <h2 className="text-xl font-bold">Navigation</h2>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Close menu"
           >
             <X size={24} />
@@ -72,10 +72,10 @@ export default function Header() {
           <Link
             to="/"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Home size={20} />
@@ -87,10 +87,10 @@ export default function Header() {
           <Link
             to="/demo/start/server-funcs"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <SquareFunction size={20} />
@@ -100,10 +100,10 @@ export default function Header() {
           <Link
             to="/demo/start/api-request"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Network size={20} />
@@ -114,17 +114,17 @@ export default function Header() {
             <Link
               to="/demo/start/ssr"
               onClick={() => setIsOpen(false)}
-              className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+              className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
               activeProps={{
                 className:
-                  'flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                  'flex-1 flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
               }}
             >
               <StickyNote size={20} />
               <span className="font-medium">Start - SSR Demos</span>
             </Link>
             <button
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               onClick={() =>
                 setGroupedExpanded((prev) => ({
                   ...prev,
@@ -144,10 +144,10 @@ export default function Header() {
               <Link
                 to="/demo/start/ssr/spa-mode"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
                 activeProps={{
                   className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                    'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
                 }}
               >
                 <StickyNote size={20} />
@@ -157,10 +157,10 @@ export default function Header() {
               <Link
                 to="/demo/start/ssr/full-ssr"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
                 activeProps={{
                   className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                    'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
                 }}
               >
                 <StickyNote size={20} />
@@ -170,10 +170,10 @@ export default function Header() {
               <Link
                 to="/demo/start/ssr/data-only"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
                 activeProps={{
                   className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                    'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
                 }}
               >
                 <StickyNote size={20} />
@@ -185,10 +185,10 @@ export default function Header() {
           <Link
             to="/demo/neon"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Database size={20} />
@@ -198,10 +198,10 @@ export default function Header() {
           <Link
             to="/demo/sentry/testing"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Globe size={20} />
@@ -211,10 +211,10 @@ export default function Header() {
           <Link
             to="/demo/prisma"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Database size={20} />
@@ -224,10 +224,10 @@ export default function Header() {
           <Link
             to="/demo/mcp-todos"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Webhook size={20} />
@@ -237,10 +237,10 @@ export default function Header() {
           <Link
             to="/demo/ai-chat"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <MessagesSquare size={20} />
@@ -250,10 +250,10 @@ export default function Header() {
           <Link
             to="/demo/ai-image"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <ImageIcon size={20} />
@@ -263,10 +263,10 @@ export default function Header() {
           <Link
             to="/demo/ai-structured"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <ChefHat size={20} />
@@ -276,10 +276,10 @@ export default function Header() {
           <Link
             to="/demo/trpc-todo"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Network size={20} />
@@ -289,10 +289,10 @@ export default function Header() {
           <Link
             to="/demo/table"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Table size={20} />
@@ -302,10 +302,10 @@ export default function Header() {
           <Link
             to="/demo/tanstack-query"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Network size={20} />
@@ -315,10 +315,10 @@ export default function Header() {
           <Link
             to="/demo/form/simple"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <ClipboardType size={20} />
@@ -328,10 +328,10 @@ export default function Header() {
           <Link
             to="/demo/form/address"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <ClipboardType size={20} />
@@ -341,10 +341,10 @@ export default function Header() {
           <Link
             to="/demo/db-chat"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Database size={20} />
@@ -354,10 +354,10 @@ export default function Header() {
           <Link
             to="/demo/apollo-client"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Network size={20} />
@@ -367,10 +367,10 @@ export default function Header() {
           <Link
             to="/schedule"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Globe size={20} />
@@ -380,10 +380,10 @@ export default function Header() {
           <Link
             to="/speakers"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Globe size={20} />
@@ -393,10 +393,10 @@ export default function Header() {
           <Link
             to="/talks"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Globe size={20} />
@@ -406,10 +406,10 @@ export default function Header() {
           <Link
             to="/demo/store"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                'flex items-center gap-3 p-3 rounded-lg bg-black text-white hover:bg-gray-800 transition-colors mb-2',
             }}
           >
             <Store size={20} />
@@ -419,7 +419,7 @@ export default function Header() {
           {/* Demo Links End */}
         </nav>
 
-        <div className="p-4 border-t border-gray-700 bg-gray-800 flex flex-col gap-2">
+        <div className="p-4 border-t border-gray-200 bg-gray-50 flex flex-col gap-2">
           <TanChatAIAssistant />
 
           <RemyButton />

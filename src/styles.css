@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 @plugin "tailwindcss-animate";
@@ -7,7 +7,7 @@
 
 body {
   @apply m-0;
-  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,75 +17,70 @@ code {
     source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Haute Patisserie Dark Theme */
+/* Modern Tech Light Theme */
 :root {
-  /* Core colors - Dark elegant bakery */
-  --background: oklch(0.13 0.01 60);
-  --foreground: oklch(0.93 0.02 85);
+  /* Core colors - Clean Tech */
+  --background: oklch(1 0 0); /* White */
+  --foreground: oklch(0.13 0.02 260); /* Zinc-900 */
 
-  /* Warm cream for cards */
-  --card: oklch(0.17 0.015 55);
-  --card-foreground: oklch(0.93 0.02 85);
+  /* Cards - White with subtle borders */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.02 260);
 
-  /* Copper accent */
-  --primary: oklch(0.65 0.14 55);
-  --primary-foreground: oklch(0.13 0.01 60);
+  /* Primary - Black for high contrast */
+  --primary: oklch(0 0 0);
+  --primary-foreground: oklch(1 0 0);
 
-  /* Antique gold */
-  --secondary: oklch(0.72 0.12 85);
-  --secondary-foreground: oklch(0.13 0.01 60);
+  /* Secondary - Light Gray */
+  --secondary: oklch(0.96 0 0); /* Zinc-100 */
+  --secondary-foreground: oklch(0.13 0.02 260);
 
-  /* Muted warm tones */
-  --muted: oklch(0.22 0.02 55);
-  --muted-foreground: oklch(0.65 0.03 85);
+  /* Muted */
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0.01 260); /* Zinc-500 */
 
-  /* Accent - rich copper */
-  --accent: oklch(0.55 0.15 45);
-  --accent-foreground: oklch(0.95 0.02 85);
+  /* Accent - Subtle Gray */
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.13 0.02 260);
 
   /* Destructive */
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.95 0.02 85);
+  --destructive: oklch(0.58 0.25 29);
+  --destructive-foreground: oklch(0.98 0 0);
 
   /* Borders and inputs */
-  --border: oklch(0.28 0.03 55);
-  --input: oklch(0.22 0.02 55);
-  --ring: oklch(0.65 0.14 55);
+  --border: oklch(0.9 0 0); /* Zinc-200 */
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.13 0.02 260);
 
-  /* Chart colors - pastry inspired */
-  --chart-1: oklch(0.65 0.14 55);
-  --chart-2: oklch(0.72 0.12 85);
-  --chart-3: oklch(0.55 0.15 45);
-  --chart-4: oklch(0.6 0.1 30);
-  --chart-5: oklch(0.5 0.08 150);
+  --radius: 0.5rem;
 
-  --radius: 0.625rem;
-
-  /* Popover */
-  --popover: oklch(0.17 0.015 55);
-  --popover-foreground: oklch(0.93 0.02 85);
+  /* Chart colors - Tech palette */
+  --chart-1: oklch(0.13 0.02 260); /* Black */
+  --chart-2: oklch(0.45 0.01 260); /* Gray */
+  --chart-3: oklch(0.25 0.02 260); /* Dark Gray */
+  --chart-4: oklch(0.7 0.01 260); /* Light Gray */
+  --chart-5: oklch(0.9 0 0); /* Very Light Gray */
 
   /* Sidebar */
-  --sidebar: oklch(0.15 0.01 55);
-  --sidebar-foreground: oklch(0.93 0.02 85);
-  --sidebar-primary: oklch(0.65 0.14 55);
-  --sidebar-primary-foreground: oklch(0.95 0.02 85);
-  --sidebar-accent: oklch(0.22 0.02 55);
-  --sidebar-accent-foreground: oklch(0.93 0.02 85);
-  --sidebar-border: oklch(0.28 0.03 55);
-  --sidebar-ring: oklch(0.65 0.14 55);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.37 0.01 260); /* Zinc-600 */
+  --sidebar-primary: oklch(0.13 0.02 260); /* Black */
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.96 0 0); /* Zinc-100 */
+  --sidebar-accent-foreground: oklch(0.13 0.02 260);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.13 0.02 260);
 }
 
 @theme inline {
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Cormorant Garamond', Georgia, serif;
-
+  --font-sans: 'Inter', sans-serif;
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -116,17 +111,6 @@ code {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
-  /* Custom colors for the theme */
-  --color-copper: oklch(0.65 0.14 55);
-  --color-copper-light: oklch(0.75 0.12 55);
-  --color-copper-dark: oklch(0.5 0.15 50);
-  --color-gold: oklch(0.72 0.12 85);
-  --color-gold-light: oklch(0.82 0.1 85);
-  --color-cream: oklch(0.93 0.02 85);
-  --color-cream-dark: oklch(0.85 0.03 80);
-  --color-charcoal: oklch(0.13 0.01 60);
-  --color-charcoal-light: oklch(0.2 0.015 55);
 }
 
 @layer base {
@@ -136,59 +120,4 @@ code {
   body {
     @apply bg-background text-foreground;
   }
-}
-
-/* Custom utilities for the theme */
-.font-display {
-  font-family: 'Playfair Display', Georgia, serif;
-}
-
-.font-body {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-}
-
-/* Elegant grain texture overlay */
-.grain-texture {
-  position: relative;
-}
-
-.grain-texture::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.4;
-}
-
-/* Golden border accent */
-.border-gold-accent {
-  border-image: linear-gradient(
-      135deg,
-      oklch(0.72 0.12 85),
-      oklch(0.65 0.14 55),
-      oklch(0.72 0.12 85)
-    )
-    1;
-}
-
-/* Copper glow effect */
-.glow-copper {
-  box-shadow:
-    0 0 20px oklch(0.65 0.14 55 / 0.3),
-    0 0 40px oklch(0.65 0.14 55 / 0.1);
-}
-
-/* Elegant card hover effect */
-.card-hover {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 12px 40px oklch(0 0 0 / 0.4),
-    0 0 20px oklch(0.65 0.14 55 / 0.15);
 }

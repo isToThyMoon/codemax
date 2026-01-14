@@ -41,14 +41,9 @@ function AddressForm() {
   })
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-white"
-      style={{
-        backgroundImage:
-          'radial-gradient(50% 50% at 5% 40%, #f4a460 0%, #8b4513 70%, #1a0f0a 100%)',
-      }}
-    >
-      <div className="w-full max-w-2xl p-8 rounded-xl backdrop-blur-md bg-black/50 shadow-xl border-8 border-black/10">
+    <div className="flex items-center justify-center min-h-screen bg-white p-4">
+      <div className="w-full max-w-2xl p-8 rounded-xl bg-white border border-gray-200 shadow-xl">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">Address Form</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault()
@@ -58,7 +53,12 @@ function AddressForm() {
           className="space-y-6"
         >
           <form.AppField name="fullName">
-            {(field) => <field.TextField label="Full Name" />}
+            {(field) => (
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Full Name</label>
+                <field.TextField className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm" />
+              </div>
+            )}
           </form.AppField>
 
           <form.AppField
@@ -75,7 +75,12 @@ function AddressForm() {
               },
             }}
           >
-            {(field) => <field.TextField label="Email" />}
+            {(field) => (
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Email</label>
+                <field.TextField className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm" />
+              </div>
+            )}
           </form.AppField>
 
           <form.AppField
@@ -89,7 +94,12 @@ function AddressForm() {
               },
             }}
           >
-            {(field) => <field.TextField label="Street Address" />}
+            {(field) => (
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Street Address</label>
+                <field.TextField className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm" />
+              </div>
+            )}
           </form.AppField>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -104,7 +114,12 @@ function AddressForm() {
                 },
               }}
             >
-              {(field) => <field.TextField label="City" />}
+              {(field) => (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">City</label>
+                  <field.TextField className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm" />
+                </div>
+              )}
             </form.AppField>
             <form.AppField
               name="address.state"
@@ -117,7 +132,12 @@ function AddressForm() {
                 },
               }}
             >
-              {(field) => <field.TextField label="State" />}
+              {(field) => (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">State</label>
+                  <field.TextField className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm" />
+                </div>
+              )}
             </form.AppField>
             <form.AppField
               name="address.zipCode"
@@ -133,7 +153,12 @@ function AddressForm() {
                 },
               }}
             >
-              {(field) => <field.TextField label="Zip Code" />}
+              {(field) => (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Zip Code</label>
+                  <field.TextField className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm" />
+                </div>
+              )}
             </form.AppField>
           </div>
 
@@ -149,19 +174,22 @@ function AddressForm() {
             }}
           >
             {(field) => (
-              <field.Select
-                label="Country"
-                values={[
-                  { label: 'United States', value: 'US' },
-                  { label: 'Canada', value: 'CA' },
-                  { label: 'United Kingdom', value: 'UK' },
-                  { label: 'Australia', value: 'AU' },
-                  { label: 'Germany', value: 'DE' },
-                  { label: 'France', value: 'FR' },
-                  { label: 'Japan', value: 'JP' },
-                ]}
-                placeholder="Select a country"
-              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Country</label>
+                <field.Select
+                  values={[
+                    { label: 'United States', value: 'US' },
+                    { label: 'Canada', value: 'CA' },
+                    { label: 'United Kingdom', value: 'UK' },
+                    { label: 'Australia', value: 'AU' },
+                    { label: 'Germany', value: 'DE' },
+                    { label: 'France', value: 'FR' },
+                    { label: 'Japan', value: 'JP' },
+                  ]}
+                  placeholder="Select a country"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
+                />
+              </div>
             )}
           </form.AppField>
 
@@ -184,13 +212,22 @@ function AddressForm() {
             }}
           >
             {(field) => (
-              <field.TextField label="Phone" placeholder="123-456-7890" />
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Phone</label>
+                <field.TextField
+                  placeholder="123-456-7890"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
+                />
+              </div>
             )}
           </form.AppField>
 
           <div className="flex justify-end">
             <form.AppForm>
-              <form.SubscribeButton label="Submit" />
+              <form.SubscribeButton
+                label="Submit"
+                className="bg-black hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              />
             </form.AppForm>
           </div>
         </form>

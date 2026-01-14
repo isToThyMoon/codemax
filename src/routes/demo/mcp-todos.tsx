@@ -32,26 +32,22 @@ function ORPCTodos() {
   }, [todo])
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-200 to-emerald-900 p-4 text-white"
-      style={{
-        backgroundImage:
-          'radial-gradient(70% 70% at 20% 20%, #07A798 0%, #045C4B 60%, #01251F 100%)',
-      }}
-    >
-      <div className="w-full max-w-2xl p-8 rounded-xl backdrop-blur-md bg-black/50 shadow-xl border-8 border-black/10">
-        <h1 className="text-2xl mb-4">MCP Todos list</h1>
-        <ul className="mb-4 space-y-2">
+    <div className="flex items-center justify-center min-h-screen bg-white p-4">
+      <div className="w-full max-w-2xl p-8 rounded-xl bg-white border border-gray-200 shadow-xl">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">
+          MCP Todos list
+        </h1>
+        <ul className="mb-6 space-y-2">
           {todos?.map((t) => (
             <li
               key={t.id}
-              className="bg-white/10 border border-white/20 rounded-lg p-3 backdrop-blur-sm shadow-md"
+              className="bg-gray-50 border border-gray-100 rounded-lg p-3 shadow-sm"
             >
-              <span className="text-lg text-white">{t.title}</span>
+              <span className="text-lg text-gray-700">{t.title}</span>
             </li>
           ))}
         </ul>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           <input
             type="text"
             value={todo}
@@ -62,12 +58,12 @@ function ORPCTodos() {
               }
             }}
             placeholder="Enter a new todo..."
-            className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
           />
           <button
             disabled={todo.trim().length === 0}
             onClick={submitTodo}
-            className="bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500/50 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg transition-colors"
+            className="bg-black hover:bg-gray-800 disabled:bg-gray-100 disabled:text-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
           >
             Add todo
           </button>

@@ -11,27 +11,23 @@ function RouteComponent() {
   const punkSongs = Route.useLoaderData()
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-zinc-800 to-black p-4 text-white"
-      style={{
-        backgroundImage:
-          'radial-gradient(50% 50% at 20% 60%, #1a1a1a 0%, #0a0a0a 50%, #000000 100%)',
-      }}
-    >
-      <div className="w-full max-w-2xl p-8 rounded-xl backdrop-blur-md bg-black/50 shadow-xl border-8 border-black/10">
-        <h1 className="text-3xl font-bold mb-6 text-pink-400">
+    <div className="flex items-center justify-center min-h-screen bg-slate-50 p-4 text-slate-900">
+      <div className="w-full max-w-2xl p-8 rounded-2xl bg-white shadow-[0_20px_50px_rgb(0,0,0,0.05)] border border-slate-100">
+        <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
           Data Only SSR - Punk Songs
         </h1>
         <ul className="space-y-3">
           {punkSongs.map((song) => (
             <li
               key={song.id}
-              className="bg-white/10 border border-white/20 rounded-lg p-4 backdrop-blur-sm shadow-md"
+              className="bg-slate-50 border border-slate-100 rounded-xl p-4 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-500/5 transition-all duration-300"
             >
-              <span className="text-lg text-white font-medium">
+              <div className="text-lg text-slate-800 font-semibold mb-1">
                 {song.name}
-              </span>
-              <span className="text-white/60"> - {song.artist}</span>
+              </div>
+              <div className="text-slate-500 text-sm font-medium">
+                {song.artist}
+              </div>
             </li>
           ))}
         </ul>

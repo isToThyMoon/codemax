@@ -20,31 +20,31 @@ const SAMPLE_RECIPES = [
 
 function RecipeCard({ recipe }: { recipe: Recipe }) {
   const difficultyColors = {
-    easy: 'bg-green-500/20 text-green-400',
-    medium: 'bg-yellow-500/20 text-yellow-400',
-    hard: 'bg-red-500/20 text-red-400',
+    easy: 'bg-green-100 text-green-700',
+    medium: 'bg-yellow-100 text-yellow-700',
+    hard: 'bg-red-100 text-red-700',
   }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h3 className="text-2xl font-bold text-white mb-2">{recipe.name}</h3>
-        <p className="text-gray-400">{recipe.description}</p>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">{recipe.name}</h3>
+        <p className="text-gray-500">{recipe.description}</p>
       </div>
 
       {/* Meta info */}
       <div className="flex flex-wrap gap-4">
-        <div className="flex items-center gap-2 text-gray-300">
-          <Clock className="w-4 h-4 text-orange-400" />
+        <div className="flex items-center gap-2 text-gray-600">
+          <Clock className="w-4 h-4 text-black" />
           <span className="text-sm">Prep: {recipe.prepTime}</span>
         </div>
-        <div className="flex items-center gap-2 text-gray-300">
-          <Clock className="w-4 h-4 text-orange-400" />
+        <div className="flex items-center gap-2 text-gray-600">
+          <Clock className="w-4 h-4 text-black" />
           <span className="text-sm">Cook: {recipe.cookTime}</span>
         </div>
-        <div className="flex items-center gap-2 text-gray-300">
-          <Users className="w-4 h-4 text-orange-400" />
+        <div className="flex items-center gap-2 text-gray-600">
+          <Users className="w-4 h-4 text-black" />
           <span className="text-sm">{recipe.servings} servings</span>
         </div>
         <div
@@ -59,15 +59,15 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
 
       {/* Ingredients */}
       <div>
-        <h4 className="text-lg font-semibold text-white mb-3">Ingredients</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-3">Ingredients</h4>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {recipe.ingredients.map((ing, idx) => (
-            <li key={idx} className="flex items-start gap-2 text-gray-300">
-              <span className="text-orange-400">•</span>
+            <li key={idx} className="flex items-start gap-2 text-gray-600">
+              <span className="text-black">•</span>
               <span>
-                <span className="font-medium">{ing.amount}</span> {ing.item}
+                <span className="font-medium text-gray-900">{ing.amount}</span> {ing.item}
                 {ing.notes && (
-                  <span className="text-gray-500 text-sm"> ({ing.notes})</span>
+                  <span className="text-gray-400 text-sm"> ({ing.notes})</span>
                 )}
               </span>
             </li>
@@ -77,11 +77,11 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
 
       {/* Instructions */}
       <div>
-        <h4 className="text-lg font-semibold text-white mb-3">Instructions</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-3">Instructions</h4>
         <ol className="space-y-3">
           {recipe.instructions.map((step, idx) => (
-            <li key={idx} className="flex gap-3 text-gray-300">
-              <span className="flex-shrink-0 w-6 h-6 bg-orange-500/20 text-orange-400 rounded-full flex items-center justify-center text-sm font-medium">
+            <li key={idx} className="flex gap-3 text-gray-600">
+              <span className="flex-shrink-0 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center text-sm font-medium">
                 {idx + 1}
               </span>
               <span>{step}</span>
@@ -93,11 +93,11 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
       {/* Tips */}
       {recipe.tips && recipe.tips.length > 0 && (
         <div>
-          <h4 className="text-lg font-semibold text-white mb-3">Tips</h4>
+          <h4 className="text-lg font-semibold text-gray-900 mb-3">Tips</h4>
           <ul className="space-y-2">
             {recipe.tips.map((tip, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-gray-300">
-                <span className="text-yellow-400">*</span>
+              <li key={idx} className="flex items-start gap-2 text-gray-600">
+                <span className="text-yellow-500">*</span>
                 <span>{tip}</span>
               </li>
             ))}
@@ -108,27 +108,27 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
       {/* Nutrition */}
       {recipe.nutritionPerServing && (
         <div>
-          <h4 className="text-lg font-semibold text-white mb-3">
+          <h4 className="text-lg font-semibold text-gray-900 mb-3">
             Nutrition (per serving)
           </h4>
           <div className="flex flex-wrap gap-4 text-sm">
             {recipe.nutritionPerServing.calories && (
-              <span className="px-3 py-1 bg-gray-700 rounded-full text-gray-300">
+              <span className="px-3 py-1 bg-gray-100 rounded-full text-gray-600">
                 {recipe.nutritionPerServing.calories} cal
               </span>
             )}
             {recipe.nutritionPerServing.protein && (
-              <span className="px-3 py-1 bg-gray-700 rounded-full text-gray-300">
+              <span className="px-3 py-1 bg-gray-100 rounded-full text-gray-600">
                 Protein: {recipe.nutritionPerServing.protein}
               </span>
             )}
             {recipe.nutritionPerServing.carbs && (
-              <span className="px-3 py-1 bg-gray-700 rounded-full text-gray-300">
+              <span className="px-3 py-1 bg-gray-100 rounded-full text-gray-600">
                 Carbs: {recipe.nutritionPerServing.carbs}
               </span>
             )}
             {recipe.nutritionPerServing.fat && (
-              <span className="px-3 py-1 bg-gray-700 rounded-full text-gray-300">
+              <span className="px-3 py-1 bg-gray-100 rounded-full text-gray-600">
                 Fat: {recipe.nutritionPerServing.fat}
               </span>
             )}
@@ -182,26 +182,28 @@ function StructuredPage() {
   const canExecute = !!(!isLoading && recipeName.trim() && !error)
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-gray-900 p-6">
+    <div className="min-h-[calc(100vh-80px)] bg-white p-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-6">
-          <ChefHat className="w-8 h-8 text-orange-500" />
-          <h1 className="text-2xl font-bold text-white">
+          <div className="p-2 bg-black rounded-lg">
+            <ChefHat className="w-6 h-6 text-white" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
             One-Shot & Structured Output
           </h1>
         </div>
 
-        <p className="text-gray-400 mb-6">
+        <p className="text-gray-500 mb-6">
           Compare two output modes:{' '}
-          <strong className="text-orange-400">One-Shot</strong> returns freeform
+          <strong className="text-black">One-Shot</strong> returns freeform
           markdown, while{' '}
-          <strong className="text-orange-400">Structured</strong> returns
+          <strong className="text-black">Structured</strong> returns
           validated JSON conforming to a Zod schema.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Recipe Name
             </label>
             <input
@@ -210,11 +212,11 @@ function StructuredPage() {
               onChange={(e) => setRecipeName(e.target.value)}
               disabled={isLoading}
               placeholder="e.g., Chocolate Chip Cookies"
-              className="w-full rounded-lg border border-orange-500/20 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50"
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
             />
 
             <div className="mt-2">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Quick Picks
               </label>
               <div className="flex flex-wrap gap-2">
@@ -223,7 +225,7 @@ function StructuredPage() {
                     key={name}
                     onClick={() => setRecipeName(name)}
                     disabled={isLoading}
-                    className="px-2 py-1 text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg border border-gray-700 transition-colors"
+                    className="px-2 py-1 text-xs bg-gray-50 hover:bg-gray-100 text-gray-600 rounded-lg border border-gray-200 transition-colors"
                   >
                     {name}
                   </button>
@@ -238,7 +240,7 @@ function StructuredPage() {
                 onClick={() => handleGenerate('oneshot')}
                 disabled={!canExecute}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors text-white ${
-                  !canExecute ? 'bg-gray-600' : 'bg-orange-500'
+                  !canExecute ? 'bg-gray-200 text-gray-400' : 'bg-black hover:bg-gray-800'
                 }`}
               >
                 One-Shot (Markdown)
@@ -246,8 +248,8 @@ function StructuredPage() {
               <button
                 onClick={() => handleGenerate('structured')}
                 disabled={!canExecute}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors  text-white ${
-                  !canExecute ? 'bg-gray-600' : 'bg-blue-500'
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors text-white ${
+                  !canExecute ? 'bg-gray-200 text-gray-400' : 'bg-black hover:bg-gray-800'
                 }`}
               >
                 Structured (JSON)
@@ -257,17 +259,17 @@ function StructuredPage() {
         </div>
 
         {/* Output Panel */}
-        <div className="mt-5 lg:col-span-2 bg-gray-800 rounded-lg p-6 border border-orange-500/20">
+        <div className="mt-5 lg:col-span-2 bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white">
+            <h2 className="text-lg font-semibold text-gray-900">
               Generated Recipe
             </h2>
             {result && (
               <span
                 className={`px-2 py-1 rounded text-xs font-medium ${
                   result.mode === 'structured'
-                    ? 'bg-purple-500/20 text-purple-400'
-                    : 'bg-blue-500/20 text-blue-400'
+                    ? 'bg-purple-100 text-purple-700'
+                    : 'bg-blue-100 text-blue-700'
                 }`}
               >
                 {result.mode === 'structured' ? 'Structured JSON' : 'Markdown'}
@@ -276,7 +278,7 @@ function StructuredPage() {
           </div>
 
           {error && (
-            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 mb-4">
+            <div className="p-4 bg-red-50 border border-red-100 rounded-lg text-red-600 mb-4">
               {error}
             </div>
           )}
@@ -286,14 +288,16 @@ function StructuredPage() {
               {result.mode === 'structured' && result.recipe ? (
                 <RecipeCard recipe={result.recipe} />
               ) : result.markdown ? (
-                <div className="prose prose-invert max-w-none">
+                <div className="prose max-w-none">
                   <Streamdown>{result.markdown}</Streamdown>
                 </div>
               ) : null}
             </div>
           ) : !error && !isLoading ? (
-            <div className="flex flex-col items-center justify-center h-64 text-gray-500">
-              <ChefHat className="w-16 h-16 mb-4 opacity-50" />
+            <div className="flex flex-col items-center justify-center h-64 text-gray-400">
+              <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-4">
+                <ChefHat className="w-8 h-8 opacity-50" />
+              </div>
               <p>
                 Enter a recipe name and click "Generate Recipe" to get started.
               </p>

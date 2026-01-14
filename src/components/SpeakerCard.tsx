@@ -17,38 +17,38 @@ export default function SpeakerCard({
   return (
     <Link to={`/speakers/${speaker.slug}`} className="group relative block">
       <Card
-        className={`relative overflow-hidden bg-card border-border/50 card-hover
+        className={`relative overflow-hidden bg-white border border-gray-200 shadow-sm transition-all duration-300
           ${featured ? 'aspect-square' : 'aspect-square'}
-          hover:border-copper/50`}
+          hover:border-gray-300 hover:shadow-lg hover:-translate-y-1`}
       >
         {/* Headshot */}
         <div className="absolute inset-0">
           <img
             src={`/${speaker.headshot}`}
             alt={speaker.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
         </div>
 
         {/* Content overlay */}
         <CardContent className="absolute bottom-0 left-0 right-0 p-6 z-10">
           <div className="space-y-2">
             {/* Specialty tag */}
-            <span className="inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase bg-copper/20 text-copper-light rounded-full border border-copper/30">
+            <span className="inline-block px-3 py-1 text-xs font-medium tracking-wide uppercase bg-white/90 text-gray-900 rounded-lg backdrop-blur-sm shadow-sm">
               {speaker.specialty}
             </span>
 
             {/* Name */}
-            <h3 className="font-display text-2xl font-semibold text-cream group-hover:text-gold transition-colors">
+            <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors">
               {speaker.name}
             </h3>
 
             {/* Title & Restaurant */}
-            <p className="text-cream/70 font-body text-lg">{speaker.title}</p>
+            <p className="text-gray-200 text-sm font-medium">{speaker.title}</p>
 
             {/* Location */}
-            <div className="flex items-center gap-2 text-cream/50 text-sm">
+            <div className="flex items-center gap-2 text-gray-300 text-xs">
               <MapPin className="w-3.5 h-3.5" />
               <span>
                 {speaker.restaurant}, {speaker.location}
@@ -56,11 +56,6 @@ export default function SpeakerCard({
             </div>
           </div>
         </CardContent>
-
-        {/* Decorative corner accent */}
-        <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden">
-          <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-copper/20 to-transparent transform rotate-45 translate-x-14 -translate-y-14" />
-        </div>
       </Card>
     </Link>
   )

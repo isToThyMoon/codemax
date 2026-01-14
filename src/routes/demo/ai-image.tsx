@@ -73,11 +73,13 @@ function ImagePage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-gray-900 p-6">
+    <div className="min-h-[calc(100vh-80px)] bg-white p-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-6">
-          <ImageIcon className="w-8 h-8 text-orange-500" />
-          <h1 className="text-2xl font-bold text-white">Image Generation</h1>
+          <div className="p-2 bg-black rounded-lg">
+            <ImageIcon className="w-6 h-6 text-white" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Image Generation</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -85,14 +87,14 @@ function ImagePage() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Size
                 </label>
                 <select
                   value={size}
                   onChange={(e) => setSize(e.target.value)}
                   disabled={isLoading}
-                  className="w-full rounded-lg border border-orange-500/20 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
                 >
                   {SIZES.map((s) => (
                     <option key={s} value={s}>
@@ -102,7 +104,7 @@ function ImagePage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Count
                 </label>
                 <input
@@ -116,13 +118,13 @@ function ImagePage() {
                   min={1}
                   max={4}
                   disabled={isLoading}
-                  className="w-full rounded-lg border border-orange-500/20 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 shadow-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Prompt
               </label>
               <textarea
@@ -130,7 +132,7 @@ function ImagePage() {
                 onChange={(e) => setPrompt(e.target.value)}
                 disabled={isLoading}
                 rows={6}
-                className="w-full rounded-lg border border-orange-500/20 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-none"
+                className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-black/5 resize-none shadow-sm placeholder:text-gray-400"
                 placeholder="Describe the image you want to generate..."
               />
             </div>
@@ -138,7 +140,7 @@ function ImagePage() {
             <button
               onClick={handleGenerate}
               disabled={isLoading || !prompt.trim()}
-              className="w-full px-4 py-3 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              className="w-full px-4 py-3 bg-black hover:bg-gray-800 disabled:bg-gray-100 disabled:text-gray-400 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 shadow-sm"
             >
               {isLoading ? (
                 <>
@@ -152,13 +154,13 @@ function ImagePage() {
           </div>
 
           {/* Output Panel */}
-          <div className="lg:col-span-2 bg-gray-800 rounded-lg p-6 border border-orange-500/20">
-            <h2 className="text-lg font-semibold text-white mb-4">
+          <div className="lg:col-span-2 bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
               Generated Images
             </h2>
 
             {error && (
-              <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 mb-4">
+              <div className="p-4 bg-red-50 border border-red-100 rounded-lg text-red-600 mb-4 text-sm">
                 {error}
               </div>
             )}
@@ -171,17 +173,17 @@ function ImagePage() {
                       <img
                         src={getImageSrc(image)}
                         alt={`Generated image ${index + 1}`}
-                        className="w-full rounded-lg border border-gray-700"
+                        className="w-full rounded-lg border border-gray-200 shadow-sm"
                       />
                       <button
                         onClick={() => handleDownload(image, index)}
-                        className="absolute top-2 right-2 p-2 bg-gray-900/80 hover:bg-gray-900 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-2 right-2 p-2 bg-white/90 hover:bg-white rounded-lg opacity-0 group-hover:opacity-100 transition-all shadow-sm border border-gray-200"
                         title="Download image"
                       >
-                        <Download className="w-4 h-4 text-white" />
+                        <Download className="w-4 h-4 text-gray-900" />
                       </button>
                       {image.revisedPrompt && (
-                        <p className="mt-2 text-xs text-gray-400 italic">
+                        <p className="mt-2 text-xs text-gray-500 italic">
                           Revised: {image.revisedPrompt}
                         </p>
                       )}
@@ -190,8 +192,10 @@ function ImagePage() {
                 </div>
               </div>
             ) : !error && !isLoading ? (
-              <div className="flex flex-col items-center justify-center h-64 text-gray-500">
-                <ImageIcon className="w-16 h-16 mb-4 opacity-50" />
+              <div className="flex flex-col items-center justify-center h-64 text-gray-400">
+                <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-4">
+                    <ImageIcon className="w-8 h-8 opacity-50" />
+                </div>
                 <p>
                   Enter a prompt and click "Generate Image" to create an image.
                 </p>
