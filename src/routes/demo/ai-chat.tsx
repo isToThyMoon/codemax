@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  Send,
   Square,
   Mic,
   MicOff,
@@ -88,14 +87,123 @@ function ChattingLayout({ children }: { children: React.ReactNode }) {
   )
 }
 
+// 单条消息渲染组件 - 使用 memo 避免不必要的重渲染
+const MessageItem = memo(function MessageItem({
+  message,
+  isPlaying,
+  isStreaming,
+  onSpeak,
+  onStopSpeak,
+}: {
+  message: ChatMessages[number]
+  isPlaying: boolean
+  isStreaming: boolean
+  onSpeak: (text: string, id: string) => void
+  onStopSpeak: () => void
+}) {
+  // Extract text content from message parts
+  const getTextContent = (
+    parts: ChatMessages[number]['parts'],
+  ): string | null => {
+    for (const part of parts) {
+      if (part.type === 'text' && part.content) {
+        return part.content
+      }
+    }
+    return null
+  }
+
+  const textContent = getTextContent(message.parts)
+  // 检查是否有内容（文本或工具调用）
+  const hasContent = message.parts.some(
+    (part) =>
+      (part.type === 'text' && part.content) ||
+      (part.type === 'tool-call' && part.output),
+  )
+
+  return (
+    <div className="py-4 text-base">
+      <div
+        className={`max-w-3xl mx-auto w-full ${
+          message.role === 'user' ? 'flex justify-end' : ''
+        }`}
+      >
+        {/* 等待首个响应时显示呼吸圆点 */}
+        {message.role === 'assistant' && isStreaming && !hasContent ? (
+          <div className="w-5 h-5 rounded-full bg-black breathing-dot" />
+        ) : (
+          <div
+            className={`${
+              message.role === 'user'
+                ? 'bg-[#f4f4f4] px-5 py-2.5 rounded-[26px] text-gray-900 max-w-[85%]'
+                : 'text-gray-900'
+            }`}
+          >
+            {message.parts.map((part, index) => {
+              if (part.type === 'text' && part.content) {
+                return (
+                  <div
+                    className="prose max-w-none prose-neutral prose-p:leading-relaxed prose-pre:bg-gray-50 prose-pre:border prose-pre:border-gray-200"
+                    key={index}
+                  >
+                    <Streamdown
+                      mode={isStreaming ? 'streaming' : 'static'}
+                      isAnimating={isStreaming}
+                    >
+                      {part.content}
+                    </Streamdown>
+                  </div>
+                )
+              }
+              // Guitar recommendation card
+              if (
+                part.type === 'tool-call' &&
+                part.name === 'recommendGuitar' &&
+                part.output
+              ) {
+                return (
+                  <div key={part.id} className="max-w-[80%] mx-auto mt-4">
+                    <GuitarRecommendation id={String(part.output?.id)} />
+                  </div>
+                )
+              }
+              return null
+            })}
+            {/* 底部操作栏 - ChatGPT 风格 */}
+            {message.role === 'assistant' && textContent && !isStreaming && (
+              <div className="flex items-center mt-2 -ml-1.5">
+                <button
+                  onClick={() =>
+                    isPlaying ? onStopSpeak() : onSpeak(textContent, message.id)
+                  }
+                  className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors rounded-md hover:bg-gray-100"
+                  title={isPlaying ? 'Stop speaking' : 'Read aloud'}
+                >
+                  {isPlaying ? (
+                    <VolumeX className="w-4 h-4" />
+                  ) : (
+                    <Volume2 className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+})
+
 function Messages({
   messages,
   playingId,
+  isLoading,
   onSpeak,
   onStopSpeak,
 }: {
   messages: ChatMessages
   playingId: string | null
+  isLoading: boolean
   onSpeak: (text: string, id: string) => void
   onStopSpeak: () => void
 }) {
@@ -112,16 +220,13 @@ function Messages({
     return null
   }
 
-  // Extract text content from message parts
-  const getTextContent = (
-    parts: ChatMessages[number]['parts'],
-  ): string | null => {
-    for (const part of parts) {
-      if (part.type === 'text' && part.content) {
-        return part.content
-      }
+  // 最后一条 assistant 消息在 loading 时正在流式传输
+  let lastAssistantIndex = -1
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role === 'assistant') {
+      lastAssistantIndex = i
+      break
     }
-    return null
   }
 
   return (
@@ -130,77 +235,23 @@ function Messages({
       className="flex-1 overflow-y-auto pb-4 min-h-0"
     >
       <div className="max-w-3xl mx-auto w-full px-4 pt-8">
-        {messages.map((message) => {
-          const textContent = getTextContent(message.parts)
+        {messages.map((message, index) => {
           const isPlaying = playingId === message.id
+          // 只有最后一条 assistant 消息在 loading 时是流式的
+          const isStreaming =
+            isLoading &&
+            message.role === 'assistant' &&
+            index === lastAssistantIndex
 
           return (
-            <div key={message.id} className="py-5 text-base">
-              <div
-                className={`flex gap-4 max-w-3xl mx-auto w-full ${
-                  message.role === 'user' ? 'justify-end' : ''
-                }`}
-              >
-                {message.role === 'assistant' && (
-                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-gray-800" />
-                    </div>
-                  </div>
-                )}
-                <div
-                  className={`min-w-0 max-w-[85%] ${
-                    message.role === 'user'
-                      ? 'bg-[#f4f4f4] px-5 py-2.5 rounded-[26px] text-gray-900'
-                      : 'text-gray-900 pl-1'
-                  }`}
-                >
-                  {message.parts.map((part, index) => {
-                    if (part.type === 'text' && part.content) {
-                      return (
-                        <div
-                          className="flex-1 min-w-0 prose max-w-none prose-neutral prose-p:leading-relaxed prose-pre:bg-gray-50 prose-pre:border prose-pre:border-gray-200"
-                          key={index}
-                        >
-                          <Streamdown>{part.content}</Streamdown>
-                        </div>
-                      )
-                    }
-                    // Guitar recommendation card
-                    if (
-                      part.type === 'tool-call' &&
-                      part.name === 'recommendGuitar' &&
-                      part.output
-                    ) {
-                      return (
-                        <div key={part.id} className="max-w-[80%] mx-auto mt-4">
-                          <GuitarRecommendation id={String(part.output?.id)} />
-                        </div>
-                      )
-                    }
-                    return null
-                  })}
-                </div>
-                {/* TTS button for assistant messages */}
-                {message.role === 'assistant' && textContent && (
-                  <button
-                    onClick={() =>
-                      isPlaying
-                        ? onStopSpeak()
-                        : onSpeak(textContent, message.id)
-                    }
-                    className="flex-shrink-0 p-1.5 text-gray-300 hover:text-black transition-colors self-start mt-1 rounded-md hover:bg-gray-100"
-                    title={isPlaying ? 'Stop speaking' : 'Read aloud'}
-                  >
-                    {isPlaying ? (
-                      <VolumeX className="w-4 h-4" />
-                    ) : (
-                      <Volume2 className="w-4 h-4" />
-                    )}
-                  </button>
-                )}
-              </div>
-            </div>
+            <MessageItem
+              key={message.id}
+              message={message}
+              isPlaying={isPlaying}
+              isStreaming={isStreaming}
+              onSpeak={onSpeak}
+              onStopSpeak={onStopSpeak}
+            />
           )
         })}
       </div>
@@ -372,6 +423,7 @@ function ChatPage() {
             <Messages
               messages={messages}
               playingId={playingId}
+              isLoading={isLoading}
               onSpeak={speak}
               onStopSpeak={stopTTS}
             />

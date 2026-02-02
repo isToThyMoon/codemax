@@ -227,3 +227,47 @@ html {
   border-radius: 0;
   color: #e4e4e7; /* zinc-200 */
 }
+
+/* ======= Streaming Typewriter Animation ======= */
+
+/* 流式内容出现动画 - 让新内容平滑淡入 */
+.prose p,
+.prose li,
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose blockquote {
+  animation: fadeInContent 0.15s ease-out;
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 优化渲染性能 - 启用硬件加速 */
+.prose {
+  will-change: contents;
+  contain: content;
+}
+
+/* 呼吸圆点动画 - 等待 AI 响应时的 loading 状态 */
+.breathing-dot {
+  animation: breathing 1.5s ease-in-out infinite;
+}
+
+@keyframes breathing {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}

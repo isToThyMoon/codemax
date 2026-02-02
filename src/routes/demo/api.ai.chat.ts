@@ -128,13 +128,21 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
           const body = await request.json()
           const { messages } = body
 
+          // Debug: 打印接收到的消息格式
+          console.log('📥 [AI Chat] Received messages:', JSON.stringify(messages, null, 2))
+
           // Determine the best available provider
           let provider: string = 'ollama'
           let model: string = 'mistral:7b'
           if (process.env.ANTHROPIC_API_KEY) {
             provider = 'anthropic'
+            // 新模型 (2025+)
             // model = 'claude-haiku-4-5'
-            model = 'claude-opus-4-5-20251101'
+            // model = 'claude-sonnet-4-20250514'
+            model = 'claude-opus-4-5'
+
+            // 旧版模型（测试代理兼容性）
+            // model = 'claude-3-5-sonnet-20241022'  // ← 测试用，确认代理至少能正确处理这个
           } else if (process.env.OPENAI_API_KEY) {
             provider = 'openai'
             model = 'gpt-4o'
@@ -142,6 +150,14 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
             provider = 'gemini'
             model = 'gemini-2.0-flash-exp'
           }
+
+          // Debug logging - 检查实际传递的参数
+          console.log('🔍 [AI Chat] Request Config:', {
+            provider,
+            model,
+            baseURL: process.env.ANTHROPIC_BASE_URL || 'default',
+            timestamp: new Date().toISOString(),
+          })
 
           // Adapter factory pattern for multi-vendor support
           const adapterConfig = {
@@ -156,6 +172,12 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
 
           const adapter = adapterConfig[provider]()
 
+          console.log('✅ [AI Chat] Adapter created, starting chat...')
+
+          // 确保消息格式正确 - TanStack AI 会自动处理 parts 格式
+          // 但我们打印一下传递给 chat() 的实际内容
+          console.log('📤 [AI Chat] Messages passed to chat():', JSON.stringify(messages, null, 2))
+
           const stream = chat({
             adapter,
             tools: [
@@ -168,14 +190,29 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
             abortController,
           })
 
+          console.log('✅ [AI Chat] Stream created, returning SSE response...')
+
           return toServerSentEventsResponse(stream, { abortController })
         } catch (error: any) {
           // If request was aborted, return early (don't send error response)
           if (error.name === 'AbortError' || abortController.signal.aborted) {
             return new Response(null, { status: 499 }) // 499 = Client Closed Request
           }
+
+          // 详细错误日志
+          console.error('❌ [AI Chat] Error:', {
+            message: error.message,
+            stack: error.stack,
+            name: error.name,
+            response: error.response?.data || error.response,
+            status: error.response?.status,
+          })
+
           return new Response(
-            JSON.stringify({ error: 'Failed to process chat request' }),
+            JSON.stringify({
+              error: 'Failed to process chat request',
+              details: error.message,
+            }),
             {
               status: 500,
               headers: { 'Content-Type': 'application/json' },
